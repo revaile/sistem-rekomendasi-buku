@@ -320,13 +320,7 @@ Nilai RMSE dan MAE yang relatif rendah menunjukkan bahwa model SVD cukup akurat 
 
 ---
 
-# 📚 Sistem Rekomendasi Buku
-
-Proyek ini membangun dua sistem rekomendasi buku menggunakan pendekatan **Content-Based Filtering** dan **Collaborative Filtering**. Sistem ini bertujuan untuk membantu pengguna menemukan buku yang sesuai dengan preferensi atau minat mereka.
-
----
-
-## ✅ Problem Statement
+## ✅ Apakah sudah menjawab setiap *Problem Statement*?
 
 1. Bagaimana merekomendasikan buku berdasarkan judul menggunakan Content-Based Filtering?
 2. Bagaimana memprediksi rating untuk buku yang belum dibaca pengguna menggunakan Collaborative Filtering?
@@ -338,7 +332,7 @@ Seluruh *Problem Statement* telah dijawab dengan baik:
 
 ---
 
-## 🎯 Goals
+## 🎯 Apakah berhasil mencapai setiap *Goal* yang diharapkan?
 
 - Membangun sistem rekomendasi berbasis konten menggunakan algoritma **Content-Based Filtering**.
 - Membangun sistem rekomendasi berbasis perilaku pengguna dengan pendekatan **Collaborative Filtering**.
@@ -350,7 +344,8 @@ Kedua tujuan ini berhasil tercapai:
 
 ---
 
-## 💡 Solution Statement
+
+## 💡 Apakah setiap *Solution Statement* yang direncanakan berdampak?
 
 - **Content-Based Filtering**  
   Menggunakan algoritma TF-IDF dan cosine similarity pada kolom kategori dan deskripsi buku.  
@@ -360,16 +355,6 @@ Kedua tujuan ini berhasil tercapai:
   Menggunakan matrix factorization (SVD) dari pustaka `Surprise` berdasarkan interaksi pengguna-buku.  
   → Mampu memberikan rekomendasi personal berbasis pola perilaku pengguna lain.
 
----
-
-## 📐 Evaluasi Model
-
-Model collaborative filtering diuji dengan metrik berikut:
-
-- **RMSE (Root Mean Squared Error)**: 0.3367  
-- **MAE (Mean Absolute Error)**: 0.2272  
-
-Nilai ini menunjukkan bahwa model SVD cukup andal dalam memprediksi rating buku yang belum dibaca pengguna.
 
 ---
 
