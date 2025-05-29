@@ -47,7 +47,7 @@ Dataset ini berisi informasi mengenai berbagai buku yang akan digunakan dalam si
 
 ## Informasi BOOK Dataset
 
-![image](https://github.com/user-attachments/assets/47c98f73-2e84-440e-85ef-f01768fd6a5c)
+![image](https://raw.githubusercontent.com/revaile/sistem-rekomendasi-buku/refs/heads/main/info.png)
 
 Jumlah Baris dan Kolom
 
