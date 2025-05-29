@@ -80,32 +80,57 @@ Jumlah Baris dan Kolom
 
 ## Univariate Exploratory Data Analysis
 
-Statik umum dataset :
+![image](https://raw.githubusercontent.com/revaile/sistem-rekomendasi-buku/refs/heads/main/uv1.png)
 
-- **Jumlah buku**: 6.398 entri
-- **Kolom dengan nilai hilang (`null`)**:
-  - `subtitle`: 65% missing
-  - `categories`: 54% missing
-  - `description`: 4% missing
-  - `thumbnail`: 5% missing
- 
-  **EDA**
+1. Distribusi Tahun Terbit Buku
+   
+Penjelasan:
+
+- Grafik menunjukkan distribusi jumlah buku berdasarkan tahun terbit.
+
+- Terlihat bahwa sebagian besar buku diterbitkan setelah tahun 1980, dan puncaknya terjadi sekitar tahun 2000–2010.
+
+- Sebelum tahun 1950, hanya sedikit buku yang ada dalam dataset.
+
+- Hal ini bisa berarti bahwa dataset lebih banyak berisi buku-buku modern.
+
   
-![image](https://github.com/user-attachments/assets/ef45f82c-324c-466e-a7d9-3d357c4e6157)
+![image](https://raw.githubusercontent.com/revaile/sistem-rekomendasi-buku/refs/heads/main/uv2.png)
 
-insight :
+2. Distribusi Rating Buku
+   
+Penjelasan:
 
-- Distribusi Tahun Terbit Buku: Mayoritas buku yang dianalisis diterbitkan setelah tahun 1990-an, dengan puncak yang sangat signifikan di awal tahun 2000-an. Ada sedikit buku yang diterbitkan sebelum tahun 1950, menunjukkan fokus data pada publikasi yang lebih modern.
+- Histogram menunjukkan distribusi average_rating dari buku-buku.
 
-![image](https://github.com/user-attachments/assets/5650d351-e651-4b2d-8940-479050351c97)
+- Rata-rata rating buku berkisar antara 3.5 hingga 4.5.
 
-insight:
+- Distribusi cenderung normal (lonceng), dengan sedikit outlier di bawah 2 dan di atas 4.8.
 
-- Distribusi Rating Buku: Sebagian besar buku memiliki rating rata-rata antara 3.5 dan 4.5, dengan puncak distribusi di sekitar 3.9 hingga 4.0. Ini menunjukkan bahwa buku-buku dalam dataset cenderung memiliki rating yang cukup tinggi.
+- Artinya sebagian besar buku memiliki rating cukup baik, menunjukkan kemungkinan bias ke buku-buku populer atau berkualitas.
 
-![image](https://github.com/user-attachments/assets/9cba54f5-49b1-4a0b-b00b-8d8a7e35e5d0)
+  
+![image](https://raw.githubusercontent.com/revaile/sistem-rekomendasi-buku/refs/heads/main/uv3.png)
 
-- Top 10 Penulis: Agatha Christie, Stephen King, dan William Shakespeare adalah tiga penulis teratas dengan jumlah karya terbanyak dalam dataset. Ini menunjukkan popularitas atau kelimpahan karya dari penulis-penulis tersebut dalam koleksi data ini.
+
+3. Top 10 Penulis
+   
+Penjelasan:
+
+- Grafik horizontal bar chart menampilkan 10 penulis dengan jumlah buku terbanyak di dataset.
+
+- Penulis paling banyak adalah Agatha Christie, diikuti oleh Stephen King dan William Shakespeare.
+
+- Ini menunjukkan bahwa penulis-penulis ini sangat produktif atau karyanya banyak masuk dalam dataset.
+
+Kesimpulan Univariate Analysis:
+Univariate analysis fokus pada satu variabel dalam satu waktu, dan dari visualisasi di atas kita bisa menyimpulkan bahwa:
+
+- Dataset didominasi oleh buku-buku yang terbit setelah tahun 1980.
+
+- Rata-rata rating buku cukup tinggi dan terdistribusi normal.
+
+- Beberapa penulis legendaris mendominasi jumlah karya dalam dataset.
 
 ## 📊 Data Preparation
 
