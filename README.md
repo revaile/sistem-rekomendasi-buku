@@ -307,6 +307,7 @@ Untuk mengevaluasi performa model collaborative filtering, digunakan dua metrik 
 
 Keterangan :
 
+![image](https://raw.githubusercontent.com/revaile/sistem-rekomendasi-buku/refs/heads/main/5.png)
 
 
 #### Hasil Evaluasi:
@@ -319,5 +320,83 @@ Nilai RMSE dan MAE yang relatif rendah menunjukkan bahwa model SVD cukup akurat 
 
 ---
 
+# 📚 Sistem Rekomendasi Buku
+
+Proyek ini membangun dua sistem rekomendasi buku menggunakan pendekatan **Content-Based Filtering** dan **Collaborative Filtering**. Sistem ini bertujuan untuk membantu pengguna menemukan buku yang sesuai dengan preferensi atau minat mereka.
+
+---
+
+## ✅ Problem Statement
+
+1. Bagaimana merekomendasikan buku berdasarkan judul menggunakan Content-Based Filtering?
+2. Bagaimana memprediksi rating untuk buku yang belum dibaca pengguna menggunakan Collaborative Filtering?
+
+Seluruh *Problem Statement* telah dijawab dengan baik:
+
+- Rekomendasi berdasarkan judul diimplementasikan menggunakan TF-IDF dan cosine similarity.
+- Prediksi rating dilakukan menggunakan model SVD dari pustaka Surprise.
+
+---
+
+## 🎯 Goals
+
+- Membangun sistem rekomendasi berbasis konten menggunakan algoritma **Content-Based Filtering**.
+- Membangun sistem rekomendasi berbasis perilaku pengguna dengan pendekatan **Collaborative Filtering**.
+
+Kedua tujuan ini berhasil tercapai:
+
+- Sistem content-based berhasil memanfaatkan informasi dari judul, kategori, dan deskripsi buku.
+- Sistem collaborative berhasil mempelajari preferensi pengguna berdasarkan interaksi rating dengan akurasi tinggi.
+
+---
+
+## 💡 Solution Statement
+
+- **Content-Based Filtering**  
+  Menggunakan algoritma TF-IDF dan cosine similarity pada kolom kategori dan deskripsi buku.  
+  → Cocok untuk cold-start problem dan ketika belum banyak interaksi pengguna.
+
+- **Collaborative Filtering**  
+  Menggunakan matrix factorization (SVD) dari pustaka `Surprise` berdasarkan interaksi pengguna-buku.  
+  → Mampu memberikan rekomendasi personal berbasis pola perilaku pengguna lain.
+
+---
+
+## 📐 Evaluasi Model
+
+Model collaborative filtering diuji dengan metrik berikut:
+
+- **RMSE (Root Mean Squared Error)**: 0.3367  
+- **MAE (Mean Absolute Error)**: 0.2272  
+
+Nilai ini menunjukkan bahwa model SVD cukup andal dalam memprediksi rating buku yang belum dibaca pengguna.
+
+---
+
+## 📌 Kesimpulan
+
+- Proyek ini berhasil membangun dua sistem rekomendasi yang saling melengkapi.
+- **Content-Based Filtering** cocok untuk pengguna baru atau buku baru.
+- **Collaborative Filtering** cocok untuk rekomendasi yang dipersonalisasi berdasarkan riwayat rating.
+- Kombinasi keduanya dapat digunakan untuk menciptakan pengalaman pencarian buku yang lebih baik dan personal.
+
+---
+
+## 🛠️ Tools & Libraries
+
+- Python
+- pandas, numpy
+- scikit-learn
+- surprise (for SVD)
+- TF-IDF Vectorizer & Cosine Similarity
+
+---
+
 ## Penutup
 Dengan dua pendekatan ini, sistem rekomendasi dapat membantu pengguna menemukan buku yang sesuai berdasarkan konten maupun interaksi pengguna lain, dan meningkatkan pengalaman membaca digital secara keseluruhan.
+
+## 🧠 Author
+
+**Ade Ripaldi Nuralim**  
+Informatics Engineering, UIN Sunan Gunung Djati Bandung  
+2025
