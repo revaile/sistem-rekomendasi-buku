@@ -47,35 +47,75 @@ Dataset ini berisi informasi mengenai berbagai buku yang akan digunakan dalam si
 
 ## Informasi BOOK Dataset
 
-| isbn13        | isbn10     | Title          | Subtitle | Authors                          | Categories                    | Published Year | Avg Rating | Pages | Ratings Count |
-| ------------- | ---------- | -------------- | -------- | -------------------------------- | ----------------------------- | -------------- | ---------- | ----- | ------------- |
-| 9780002005883 | 0002005883 | Gilead         | –        | Marilynne Robinson               | Fiction                       | 2004           | 3.85       | 247   | 361           |
-| 9780002261982 | 0002261987 | Spider's Web   | A Novel  | Charles Osborne; Agatha Christie | Detective and mystery stories | 2000           | 3.83       | 241   | 5164          |
-| 9780006163831 | 0006163831 | The One Tree   | –        | Stephen R. Donaldson             | American fiction              | 1982           | 3.97       | 479   | 172           |
-| 9780006178736 | 0006178731 | Rage of Angels | –        | Sidney Sheldon                   | Fiction                       | 1993           | 3.93       | 512   | 29532         |
-| 9780006280897 | 0006280897 | The Four Loves | –        | Clive Staples Lewis              | Christian life                | 2002           | 4.15       | 170   | 33684         |
+![image](https://github.com/user-attachments/assets/47c98f73-2e84-440e-85ef-f01768fd6a5c)
 
 Jumlah Baris dan Kolom
 
-6671 baris → ada 6671 entri data buku.
+6810 baris → ada 6810 entri data buku.
 
-13 kolom → Asetiap buku memiliki 13 atribut atau fitur.
+12 kolom → Asetiap buku memiliki 12 atribut atau fitur.
 
 
 ## 🔢 Struktur Dataset
 
-| Kolom            | Deskripsi |
-|------------------|-----------|
-| `isbn13`         | Kode ISBN-13 sebagai identifikasi unik buku (13 digit). |
-| `isbn10`         | Kode ISBN-10 sebagai versi lama identifikasi buku (10 digit). |
-| `title`          | Judul utama buku. |
-| `subtitle`       | Subjudul buku (jika tersedia). |
-| `authors`        | Nama penulis buku. |
-| `categories`     | Kategori atau genre buku (misalnya: Fiction, Juvenile Fiction, dll). |
-| `thumbnail`      | URL gambar sampul buku dari Google Books API. |
-| `description`    | Ringkasan isi buku. |
-| `published_year` | Tahun terbit buku. Rentang: 1853–2019. |
-| `average_rating` | Rata-rata rating pembaca terhadap buku (skala 0–5). |
+| Kolom            | Deskripsi                                                              |
+| ---------------- | ---------------------------------------------------------------------- |
+| `isbn13`         | Nomor ISBN versi 13 digit dari buku                                    |
+| `isbn10`         | Nomor ISBN versi 10 digit dari buku                                    |
+| `title`          | Judul utama dari buku                                                  |
+| `subtitle`       | Subjudul buku (jika tersedia)                                          |
+| `authors`        | Nama penulis atau beberapa penulis, dipisahkan dengan titik koma (`;`) |
+| `categories`     | Kategori atau genre buku                                               |
+| `thumbnail`      | URL gambar sampul buku (thumbnail)                                     |
+| `description`    | Ringkasan atau deskripsi singkat isi buku                              |
+| `published_year` | Tahun buku diterbitkan                                                 |
+| `average_rating` | Rata-rata rating dari pembaca                                          |
+| `num_pages`      | Jumlah halaman pada buku                                               |
+| `ratings_count`  | Jumlah total penilaian/rating yang diberikan oleh pembaca              |
+
+
+### mengecek jumlah nilai kosong (null/NaN) di setiap kolom dari DataFrame df.
+
+
+```python
+df.isnull().sum()
+```
+
+## 📊 Missing Data Summary
+
+Berikut adalah jumlah nilai kosong (null) yang ditemukan pada setiap kolom dalam dataset berukuran **6671 baris × 13 kolom**:
+
+| Kolom            | Jumlah Null | Keterangan                                   |
+|------------------|--------------|-----------------------------------------------|
+| `subtitle`       | 4429         | Banyak buku tidak memiliki subjudul.         |
+| `authors`        | 72           | Beberapa data buku tidak mencantumkan penulis. |
+| `thumbnail`      | 329          | Tidak semua buku memiliki gambar sampul.     |
+| `published_year` | 6            | Tahun terbit tidak tersedia untuk sebagian kecil buku. |
+| `categories`     | 99           | Ada buku yang tidak dikategorikan secara eksplisit. |
+| `description`    | 262          | Deskripsi buku tidak tersedia seluruhnya.    |
+| `average_rating` | 43           | Nilai rata-rata rating tidak tercatat.       |
+| `num_pages`      | 43           | Jumlah halaman tidak disebutkan.             |
+| `ratings_count`  | 43           | Tidak diketahui berapa banyak rating yang diberikan. |
+
+
+
+📌 **Alasan:**  
+Pengecekan perlu dilakukan sebelum analisis
+
+---
+
+### Cek duplikasi
+
+```python
+print("Jumlah duplikat:", df.duplicated().sum())
+```
+
+Dari hasil kode di atas jumlah duplikasi pada data ini adalah 0, tidak ada duplikasi.
+
+📌 **Alasan:**  
+Cek duplikasi dilakukan agar data yang digunakan bersih dan tidak menyesatkan hasil analisis atau model.
+
+---
 
 
 ## Univariate Exploratory Data Analysis
@@ -168,45 +208,6 @@ df['categories'] = df['categories'].apply(lambda x: x.split(',')[0].strip())
 
 📌 **Alasan:**  
 Setiap buku bisa memiliki lebih dari satu kategori. Untuk menyederhanakan representasi konten, kita ambil kategori utama (pertama) agar pemodelan lebih fokus dan tidak terlalu kompleks.
-
----
-
-### 2. mengecek jumlah nilai kosong (null/NaN) di setiap kolom dari DataFrame df.
-
-
-```python
-df.isnull().sum()
-```
-
-maka jumlah data null adalah:
-
-- subtitle	4328
-- authors	71
-- thumbnail	271
-- published_year	3
-
-Total keseluruhan data null: 4673 nilai kosong.
-
-untuk lebih jelasnya pada tabel berikut ini:
-
-![image](https://github.com/user-attachments/assets/47c98f73-2e84-440e-85ef-f01768fd6a5c)
-
-
-📌 **Alasan:**  
-Pengecekan perlu dilakukan sebelum analisis
-
----
-
-### 2. Cek duplikasi
-
-```python
-print("Jumlah duplikat:", df.duplicated().sum())
-```
-
-Dari hasil kode di atas jumlah duplikasi pada data ini adalah 0, tidak ada duplikasi.
-
-📌 **Alasan:**  
-Cek duplikasi dilakukan agar data yang digunakan bersih dan tidak menyesatkan hasil analisis atau model.
 
 ---
 
