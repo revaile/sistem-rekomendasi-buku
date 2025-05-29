@@ -230,7 +230,21 @@ recommend_books_content("Rage of angels")
 
 #### Output:
 
-![image](https://github.com/user-attachments/assets/900d1b30-1722-45fa-afdf-54baa861b42a)
+![image](https://raw.githubusercontent.com/revaile/sistem-rekomendasi-buku/refs/heads/main/1.png)
+
+Sistem ini bertujuan untuk merekomendasikan buku-buku yang mirip dari segi isi (konten), dalam hal ini berdasarkan gabungan kategori dan deskripsi, bukan dari perilaku pengguna
+
+penjeleasan:
+
+- Interpretasi Hasil:
+  - Buku-buku yang direkomendasikan memiliki tema serupa dengan "Rage of Angels":
+
+  - Genre seperti Fiction, Organized Crime, dan Drama Hukum (Legal Drama).
+
+  - Hal ini menunjukkan bahwa sistem berhasil menangkap kemiripan konten, bukan hanya berdasarkan judul, tetapi berdasarkan topik utama yang dijelaskan dalam kategori dan deskripsi.
+
+  - Rata-rata rating buku juga cukup tinggi (≥ 3.6), yang berarti hasil rekomendasinya layak dibaca.
+
 
 ### 👥 2. Collaborative Filtering (Prediksi Rating Buku)
 
@@ -248,7 +262,17 @@ recommend_books_collab()
 
 #### Output:
 
-![image](https://github.com/user-attachments/assets/642428a7-9905-4776-9bdf-ce50fa342fa3)
+![image](https://raw.githubusercontent.com/revaile/sistem-rekomendasi-buku/refs/heads/main/2.png)
+
+Sistem ini bertujuan untuk memprediksi rating buku yang belum dibaca oleh pengguna, berdasarkan pola rating pengguna lain terhadap buku-buku yang sama atau serupa. Sistem ini tidak melihat isi/konten buku, melainkan mengandalkan kesamaan perilaku pengguna.
+
+interpretasi Rekomendasi Collaborative Filtering
+
+Berbasis Statistik Rating Pengguna Lain Sistem merekomendasikan buku kepada 'test_user' meskipun tidak ada data riil pengguna ini, dengan mengandalkan pola rating dari pengguna lain pada buku-buku populer.
+
+Fokus pada Pola, Bukan Isi Buku Model tidak mempertimbangkan genre atau deskripsi buku. Buku dari genre yang berbeda bisa direkomendasikan jika memiliki rating tinggi secara umum.
+
+Buku Populer Cenderung Direkomendasikan Buku-buku dengan average rating tinggi seperti Fiction, Mystery, dan Christian Life muncul karena disukai oleh banyak pengguna, bukan karena kemiripan konten.
 
 ---
 
@@ -273,7 +297,7 @@ Untuk mengevaluasi performa model collaborative filtering, digunakan dua metrik 
 
 #### Formula:
 - RMSE:
-- 
+  
 ![image](https://github.com/user-attachments/assets/568b0534-9e1b-4f00-a7cd-74f8ea6dae8d)
 
 
