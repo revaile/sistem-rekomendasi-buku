@@ -132,7 +132,7 @@ Univariate analysis fokus pada satu variabel dalam satu waktu, dan dari visualis
 
 - Beberapa penulis legendaris mendominasi jumlah karya dalam dataset.
 
-## 📊 Data Preparation
+## Data Preprocessing
 
 Tahapan _data preparation_ dilakukan untuk membersihkan dan mempersiapkan data sebelum digunakan pada sistem rekomendasi. Teknik yang diterapkan dilakukan secara berurutan sebagai berikut:
 
@@ -158,7 +158,9 @@ Ketiga kolom ini merupakan informasi penting untuk sistem rekomendasi berbasis k
 
 ---
 
-### 3. Menyederhanakan Kolom `categories` dengan Mengambil Kategori Pertama
+## 📊 Data Preparation
+
+### 1. Menyederhanakan Kolom `categories` dengan Mengambil Kategori Pertama
 
 ```python
 df['categories'] = df['categories'].apply(lambda x: x.split(',')[0].strip())
@@ -169,41 +171,42 @@ Setiap buku bisa memiliki lebih dari satu kategori. Untuk menyederhanakan repres
 
 ---
 
-### 4. Membuat Fitur Gabungan Konten Buku dari `title` dan `categories`
+### 2. mengecek jumlah nilai kosong (null/NaN) di setiap kolom dari DataFrame df.
+
 
 ```python
-df['content'] = df['title'] + ' ' + df['categories']
+df.isnull().sum()
 ```
 
+maka jumlah data null adalah:
+
+- subtitle	4328
+- authors	71
+- thumbnail	271
+- published_year	3
+
+Total keseluruhan data null: 4673 nilai kosong.
+
+untuk lebih jelasnya pada tabel berikut ini:
+
+![image](https://github.com/user-attachments/assets/47c98f73-2e84-440e-85ef-f01768fd6a5c)
+
+
 📌 **Alasan:**  
-Gabungan antara judul dan kategori buku dianggap sebagai representasi konten yang bisa dianalisis oleh mesin. Ini sangat berguna dalam pendekatan content-based filtering.
+Pengecekan perlu dilakukan sebelum analisis
 
 ---
 
-### 5. Konversi Fitur `content` Menjadi Representasi Numerik Menggunakan TF-IDF
+### 2. Cek duplikasi
 
 ```python
-from sklearn.feature_extraction.text import TfidfVectorizer
-
-tfidf = TfidfVectorizer()
-tfidf_matrix = tfidf.fit_transform(df['content'])
+print("Jumlah duplikat:", df.duplicated().sum())
 ```
 
-📌 **Alasan:**  
-Algoritma machine learning tidak bisa memproses data teks secara langsung. Oleh karena itu, teks perlu diubah menjadi vektor numerik. TF-IDF memberi bobot berdasarkan frekuensi kata yang relevan, sehingga fitur teks menjadi lebih bermakna.
-
----
-
-### 6. Menghitung Kemiripan Antar Buku Menggunakan Cosine Similarity
-
-```python
-from sklearn.metrics.pairwise import cosine_similarity
-
-cosine_sim = cosine_similarity(tfidf_matrix)
-```
+Dari hasil kode di atas jumlah duplikasi pada data ini adalah 0, tidak ada duplikasi.
 
 📌 **Alasan:**  
-Cosine similarity digunakan untuk mengukur tingkat kemiripan antar buku berdasarkan vektor TF-IDF-nya. Semakin tinggi nilai cosine, semakin mirip isi konten dua buku tersebut.
+Cek duplikasi dilakukan agar data yang digunakan bersih dan tidak menyesatkan hasil analisis atau model.
 
 ---
 
