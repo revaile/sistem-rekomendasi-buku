@@ -83,7 +83,6 @@ df.isnull().sum()
 
 ## 📊 Missing Data Summary
 
-Berikut adalah jumlah nilai kosong (null) yang ditemukan pada setiap kolom dalam dataset berukuran **6671 baris × 13 kolom**:
 
 | Kolom            | Jumlah Null | Keterangan                                   |
 |------------------|--------------|-----------------------------------------------|
@@ -200,7 +199,35 @@ Ketiga kolom ini merupakan informasi penting untuk sistem rekomendasi berbasis k
 
 ## 📊 Data Preparation
 
-### 1. Menyederhanakan Kolom `categories` dengan Mengambil Kategori Pertama
+### 1. Reset Index
+
+```python
+df.reset_index(drop=True, inplace=True)
+```
+
+📌 **Alasan:**
+Menghapus indeks lama untuk memastikan urutan baris bersih dan konsisten, terutama setelah proses merge atau filter data.
+
+
+### 2. Penanganan Missing Values
+
+```python
+df['description'] = df['description'].fillna('')
+df['authors'] = df['authors'].fillna("Unknown Author")
+df['thumbnail'] = df['thumbnail'].fillna("https://via.placeholder.com/150")
+df['published_year'] = df['published_year'].fillna(df['published_year'].median())
+```
+
+📌 **Alasan:**
+- Kolom description diisi dengan string kosong agar tidak mengganggu pemrosesan teks.
+
+- Kolom authors diisi dengan "Unknown Author" sebagai nilai default.
+
+- Kolom thumbnail diisi dengan URL placeholder agar tetap bisa ditampilkan.
+
+- Kolom published_year menggunakan median karena merupakan nilai numerik dan median lebih tahan terhadap outlier.
+  
+### 3. Standarisasi Kolom categories
 
 ```python
 df['categories'] = df['categories'].apply(lambda x: x.split(',')[0].strip())
@@ -208,6 +235,47 @@ df['categories'] = df['categories'].apply(lambda x: x.split(',')[0].strip())
 
 📌 **Alasan:**  
 Setiap buku bisa memiliki lebih dari satu kategori. Untuk menyederhanakan representasi konten, kita ambil kategori utama (pertama) agar pemodelan lebih fokus dan tidak terlalu kompleks.
+
+### 4. Standarisasi Kolom categories
+
+```python
+df['content'] = df['categories'] + " " + df['description']
+```
+
+📌 **Alasan:**  
+Fitur content dibentuk dengan menggabungkan kategori dan deskripsi untuk menghasilkan representasi teks yang lebih kaya dan relevan dalam pendekatan berbasis konten (content-based filtering).
+
+### 5. Transformasi Teks dengan TF-IDF
+
+```python
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+vectorizer = TfidfVectorizer(stop_words='english')
+tfidf_matrix = vectorizer.fit_transform(df['content'])
+```
+
+📌 **Alasan:**  
+TF-IDF digunakan untuk mengubah teks content menjadi vektor numerik yang merepresentasikan pentingnya setiap kata, sekaligus menghilangkan kata-kata umum yang tidak bermakna (stop_words='english').
+
+### 5. Split data dan  Simulasi Data Rating untuk Collaborative Filtering
+
+```python
+from surprise.model_selection import train_test_split
+
+# Buat dataset Surprise
+reader = Reader(rating_scale=(0, 5))
+data = Dataset.load_from_df(df[['isbn13', 'title', 'average_rating']], reader)
+
+trainset, testset = train_test_split(data, test_size=0.2)
+
+```
+
+📌 **Alasan:**  
+
+Pemisahan data (train-test split) sangat penting dalam proses Collaborative Filtering agar model dapat dilatih pada sebagian data (trainset) dan dievaluasi pada data yang belum pernah dilihat sebelumnya (testset). Hal ini memastikan bahwa performa model diukur secara objektif dan tidak mengalami overfitting.
+
+Simulasi ini juga menggunakan rating rata-rata (average_rating) sebagai representasi interaksi pengguna-buku karena data rating eksplisit dari pengguna sesungguhnya tidak tersedia. Strategi ini umum digunakan ketika hanya terdapat metadata buku tanpa histori pengguna.
+
 
 ---
 
@@ -221,11 +289,8 @@ Tahapan ini membahas model sistem rekomendasi yang dibangun untuk memberikan rek
 ### 📘 1. Content-Based Filtering (Rekomendasi Berdasarkan Judul)
 
 Pendekatan ini merekomendasikan buku berdasarkan kemiripan antara deskripsi dan kategori buku menggunakan teknik **TF-IDF** dan **cosine similarity**.
+Pendekatan ini memberikan rekomendasi berdasarkan kesamaan isi buku, dengan menggunakan informasi dari kolom categories dan description. Teknik yang digunakan adalah TF-IDF (Term Frequency-Inverse Document Frequency) untuk representasi teks dan Cosine Similarity untuk mengukur kemiripan antar buku.
 
-#### Langkah-langkah:
-- Menggabungkan kolom `categories` dan `description` sebagai fitur teks.
-- Melakukan transformasi teks menggunakan `TfidfVectorizer`.
-- Menghitung kemiripan antar buku dengan `cosine_similarity`.
 
 #### Contoh Kode:
 ```python
@@ -253,6 +318,7 @@ penjeleasan:
 ### 👥 2. Collaborative Filtering (Prediksi Rating Buku)
 
 Pendekatan ini menggunakan metode **model-based collaborative filtering** dengan algoritma **SVD (Singular Value Decomposition)** dari pustaka `surprise`.
+Pendekatan ini menggunakan algoritma SVD (Singular Value Decomposition) dari pustaka surprise, dan termasuk dalam kategori model-based collaborative filtering. Tujuannya adalah mempelajari pola rating antar pengguna dan buku untuk memprediksi rating buku yang belum pernah diberi rating oleh pengguna tertentu.
 
 #### Langkah-langkah:
 - Membuat dataset dengan kolom `isbn13`, `title`, dan `average_rating`.
