@@ -382,8 +382,8 @@ Keterangan :
 
 #### Hasil Evaluasi:
 ```python
-RMSE: 0.3367
-MAE:  0.2272
+RMSE: 0.3261
+MAE:  0.2355  
 ```
 
 Nilai RMSE dan MAE yang relatif rendah menunjukkan bahwa model SVD cukup akurat dalam memprediksi rating buku yang disukai pengguna fiktif. Hal ini menandakan bahwa sistem dapat digunakan untuk memberikan rekomendasi yang relevan berdasarkan preferensi pengguna.
