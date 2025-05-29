@@ -298,12 +298,15 @@ Untuk mengevaluasi performa model collaborative filtering, digunakan dua metrik 
 #### Formula:
 - RMSE:
   
-![image](https://github.com/user-attachments/assets/568b0534-9e1b-4f00-a7cd-74f8ea6dae8d)
+![image](https://raw.githubusercontent.com/revaile/sistem-rekomendasi-buku/refs/heads/main/3.png)
 
 
 - MAE:
-- 
-![image](https://github.com/user-attachments/assets/657e1fca-fe04-4f39-8a61-1ebfce27eb8d)
+  
+![image](https://raw.githubusercontent.com/revaile/sistem-rekomendasi-buku/refs/heads/main/4.png)
+
+Keterangan :
+
 
 
 #### Hasil Evaluasi:
