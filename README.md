@@ -1,4 +1,4 @@
-# Laporan Proyek Machine Learning - Ade Ripaldi Nuralim
+# Laporan Proyek Sistem Rekomendasi Buku - Ade Ripaldi Nuralim
 
 ## Project Overview
 
@@ -32,9 +32,35 @@ Beberapa pendekatan populer dalam sistem rekomendasi adalah content-based filter
 
 ## Data Understanding
 
-Dataset dapat diunduh di: [Kaggle Book Dataset](https://www.kaggle.com/datasets/abdallahwagih/books-dataset/data)
-
 Dataset ini berisi informasi mengenai berbagai buku yang akan digunakan dalam sistem rekomendasi. Setiap baris mewakili satu buku unik dengan beberapa atribut yang mendeskripsikannya.
+## Informasi BOOK Dataset 
+
+| Jenis | Keterangan |
+| ------ | ------ |
+| Title | _Books Dataset_ |
+| Source | [Kaggle](https://www.kaggle.com/datasets/abdallahwagih/books-dataset) |
+| Maintainer | [Abdullah Wagih Ibrahim](https://www.kaggle.com/abdallahwagih) |
+| License | Other (specified in description) |
+| Visibility | Publik |
+| Tags | _Literature, Deep Learning, Recommender System, Sentence Similarity_ |
+| Usability | 10.00 |
+
+## Informasi BOOK Dataset
+
+| isbn13        | isbn10     | Title          | Subtitle | Authors                          | Categories                    | Published Year | Avg Rating | Pages | Ratings Count |
+| ------------- | ---------- | -------------- | -------- | -------------------------------- | ----------------------------- | -------------- | ---------- | ----- | ------------- |
+| 9780002005883 | 0002005883 | Gilead         | –        | Marilynne Robinson               | Fiction                       | 2004           | 3.85       | 247   | 361           |
+| 9780002261982 | 0002261987 | Spider's Web   | A Novel  | Charles Osborne; Agatha Christie | Detective and mystery stories | 2000           | 3.83       | 241   | 5164          |
+| 9780006163831 | 0006163831 | The One Tree   | –        | Stephen R. Donaldson             | American fiction              | 1982           | 3.97       | 479   | 172           |
+| 9780006178736 | 0006178731 | Rage of Angels | –        | Sidney Sheldon                   | Fiction                       | 1993           | 3.93       | 512   | 29532         |
+| 9780006280897 | 0006280897 | The Four Loves | –        | Clive Staples Lewis              | Christian life                | 2002           | 4.15       | 170   | 33684         |
+
+Jumlah Baris dan Kolom
+
+6671 baris → ada 6671 entri data buku.
+
+13 kolom → Asetiap buku memiliki 13 atribut atau fitur.
+
 
 ## 🔢 Struktur Dataset
 
@@ -51,9 +77,8 @@ Dataset ini berisi informasi mengenai berbagai buku yang akan digunakan dalam si
 | `published_year` | Tahun terbit buku. Rentang: 1853–2019. |
 | `average_rating` | Rata-rata rating pembaca terhadap buku (skala 0–5). |
 
-Ringkasan informasi dataset:
 
-![image](https://github.com/user-attachments/assets/cc9e9ea0-8de9-435a-83fc-5504a9eef898)
+## Univariate Exploratory Data Analysis
 
 Statik umum dataset :
 
