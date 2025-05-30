@@ -230,13 +230,13 @@ df['published_year'] = df['published_year'].fillna(df['published_year'].median()
 ### 3. Standarisasi Kolom categories
 
 ```python
-df['categories'] = df['categories'].apply(lambda x: x.split(',')[0].strip())
+df['categories'] = df['categories'].apply(lambda x: x.split(',')[0] if ',' in x else x)
 ```
 
 📌 **Alasan:**  
 Setiap buku bisa memiliki lebih dari satu kategori. Untuk menyederhanakan representasi konten, kita ambil kategori utama (pertama) agar pemodelan lebih fokus dan tidak terlalu kompleks.
 
-### 4. Standarisasi Kolom categories
+### 4. Pembuatan Fitur content
 
 ```python
 df['content'] = df['categories'] + " " + df['description']
